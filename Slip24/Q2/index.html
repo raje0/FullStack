@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AngularJS User Validation</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body ng-app="validationApp">
+
+    <div ng-controller="ValidationController">
+        <h2>User Validation Form</h2>
+        
+        <form ng-submit="validateUser()">
+            <div>
+                <label for="username">Username:</label>
+                <input type="text" id="username" ng-model="username" required>
+            </div>
+            <br>
+            <div>
+                <label for="password">Password:</label>
+                <input type="password" id="password" ng-model="password" required>
+            </div>
+            <br>
+            <button type="submit">Submit</button>
+        </form>
+        
+        <p ng-if="usernameValid">Valid username!</p>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

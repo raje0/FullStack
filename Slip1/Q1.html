@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login Form</title>
+    <script>
+        function validateForm() {
+            let email = document.getElementById("email").value;
+            let password = document.getElementById("password").value;
+            let emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-z]{2,4}$/;
+            let passwordPattern = /^[A-Za-z0-9@#$%^&+=]{6,20}$/;
+            if (!emailPattern.test(email)) {
+                alert("Invalid Email ID");
+                return false;
+            }
+            if (!passwordPattern.test(password)) {
+                alert("Invalid Password");
+                return false;
+            }
+            alert("Login Successful");
+            return true;
+        }
+    </script>
+</head>
+<body>
+    <form onsubmit="return validateForm()">
+        <label>Email:</label>
+        <input type="text" id="email" name="email"><br><br>
+        <label>Password:</label>
+        <input type="password" id="password" name="password"><br><br>
+        <input type="submit" value="Login">
+    </form>
+</body>
+</html>

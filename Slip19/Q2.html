@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html ng-app="formApp">
+<head>
+  <meta charset="UTF-8">
+  <title>SPA - User Form Validation</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  <style>
+    form {
+      width: 400px;
+      margin: 20px auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 8px;
+      margin: 10px 0;
+    }
+    .error {
+      color: red;
+      font-size: 0.9em;
+    }
+  </style>
+</head>
+<body ng-controller="FormController">
+
+  <form name="userForm" novalidate ng-submit="submitForm()">
+    <h2>Student Details Form</h2>
+
+
+    <label>Name:</label>
+    <input type="text" name="name" ng-model="user.name" ng-pattern="/^[a-zA-Z ]+$/" required>
+    <div class="error" ng-show="userForm.name.$touched && userForm.name.$invalid">
+      Name must contain only letters.
+    </div>
+
+    
+    <label>Address:</label>
+    <textarea name="address" ng-model="user.address" readonly>
+SPPU M.Sc. Computer Science Syllabus 2023-24
+    </textarea>
+
+   
+    <label>Mobile Number:</label>
+    <input type="text" name="mobile" ng-model="user.mobile" ng-pattern="/^[0-9]{10}$/" required>
+    <div class="error" ng-show="userForm.mobile.$touched && userForm.mobile.$invalid">
+      Mobile number must be exactly 10 digits.
+    </div>
+
+ 
+    <label>Pin Code:</label>
+    <input type="text" name="pincode" ng-model="user.pincode" ng-pattern="/^[0-9]{6}$/" required>
+    <div class="error" ng-show="userForm.pincode.$touched && userForm.pincode.$invalid">
+      Pin code must be exactly 6 digits.
+    </div>
+
+   
+    <label>Email:</label>
+    <input type="email" name="email" ng-model="user.email" ng-pattern="/^[^@]+@[^@]+\.[^@]+$/" required>
+    <div class="error" ng-show="userForm.email.$touched && userForm.email.$invalid">
+      Email must contain one @ and a dot (e.g., user@example.com).
+    </div>
+
+    <button type="submit" ng-disabled="userForm.$invalid">Submit</button>
+  </form>
+
+  <script>
+    var app = angular.module('formApp', []);
+
+    app.controller('FormController', function($scope) {
+      $scope.user = {
+        address: 'SPPU M.Sc. Computer Science Syllabus 2023-24'
+      };
+
+      $scope.submitForm = function() {
+        if ($scope.userForm.$valid) {
+          alert("Form submitted successfully!");
+          console.log($scope.user);
+        }
+      };
+    });
+  </script>
+
+</body>
+</html>

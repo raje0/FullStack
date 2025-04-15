@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Feedback Form</title>
+</head>
+<body>
+
+<h2>Student Feedback Form</h2>
+
+<form onsubmit="return validateForm()">
+    Name: <input type="text" id="name"><br><br>
+    Email ID: <input type="text" id="email"><br><br>
+    Mobile No.: <input type="text" id="mobile"><br><br>
+    Feedback:
+    <select id="feedback">
+        <option value="">Select</option>
+        <option value="Not good">Not good</option>
+        <option value="Good">Good</option>
+        <option value="Very good">Very good</option>
+        <option value="Excellent">Excellent</option>
+    </select><br><br>
+
+    <input type="submit" value="Submit">
+</form>
+
+<script>
+function validateForm() {
+    let name = document.getElementById("name").value.trim();
+    let email = document.getElementById("email").value.trim();
+    let mobile = document.getElementById("mobile").value.trim();
+    let feedback = document.getElementById("feedback").value;
+
+    let namePattern = /^[A-Za-z\s]+$/;
+    let emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-z]{2,}$/;
+    let mobilePattern = /^[6-9]\d{9}$/;
+
+    if (!namePattern.test(name)) {
+        alert("Please enter a valid Name (letters and spaces only).");
+        return false;
+    }
+
+    if (!emailPattern.test(email)) {
+        alert("Please enter a valid Email ID.");
+        return false;
+    }
+
+    if (!mobilePattern.test(mobile)) {
+        alert("Please enter a valid Mobile Number (10 digits starting with 6-9).");
+        return false;
+    }
+
+    if (feedback === "") {
+        alert("Please select your Feedback.");
+        return false;
+    }
+
+    alert("Feedback submitted successfully!");
+    return true;
+}
+</script>
+
+</body>
+</html>

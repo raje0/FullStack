@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Registration Form</title>
+</head>
+<body>
+
+<h2>Student Registration Form</h2>
+
+<form onsubmit="return validateForm()">
+    First Name: <input type="text" id="firstName"><br><br>
+    Last Name: <input type="text" id="lastName"><br><br>
+    Age: <input type="number" id="age"><br><br>
+    <input type="submit" value="Register">
+</form>
+
+<script>
+function validateForm() {
+    let firstName = document.getElementById("firstName").value.trim();
+    let lastName = document.getElementById("lastName").value.trim();
+    let age = parseInt(document.getElementById("age").value.trim());
+
+    let namePattern = /^[A-Za-z]+$/;
+
+    if (!namePattern.test(firstName)) {
+        alert("First Name must contain alphabets only.");
+        return false;
+    }
+
+    if (!namePattern.test(lastName)) {
+        alert("Last Name must contain alphabets only.");
+        return false;
+    }
+
+    if (isNaN(age) || age < 18 || age > 50) {
+        alert("Age must be a number between 18 and 50.");
+        return false;
+    }
+
+    alert("Registration Successful!");
+    return true;
+}
+</script>
+
+</body>
+</html>

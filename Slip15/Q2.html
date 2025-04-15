@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Employee Registration Form</title>
+</head>
+<body>
+
+<h2>Employee Registration Form</h2>
+
+<form onsubmit="return validateForm()">
+    Employee Name: <input type="text" id="employeeName"><br><br>
+    Email ID: <input type="email" id="email"><br><br>
+    Mobile Number: <input type="text" id="mobile"><br><br>
+    Department: <input type="text" id="department"><br><br>
+    Joining Date: <input type="date" id="joiningDate"><br><br>
+    <input type="submit" value="Register">
+</form>
+
+<script>
+function validateForm() {
+    let employeeName = document.getElementById("employeeName").value.trim();
+    let email = document.getElementById("email").value.trim();
+    let mobile = document.getElementById("mobile").value.trim();
+    let department = document.getElementById("department").value.trim();
+    let joiningDate = document.getElementById("joiningDate").value;
+
+    let namePattern = /^[A-Za-z\s]+$/;
+    let emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+    let mobilePattern = /^[0-9]{10}$/;
+    let departmentPattern = /^[A-Za-z\s]+$/;
+
+    if (!namePattern.test(employeeName)) {
+        alert("Employee Name must contain alphabets and spaces only.");
+        return false;
+    }
+
+    if (!emailPattern.test(email)) {
+        alert("Please enter a valid Email ID.");
+        return false;
+    }
+
+    if (!mobilePattern.test(mobile)) {
+        alert("Mobile Number must be 10 digits.");
+        return false;
+    }
+
+    if (!departmentPattern.test(department)) {
+        alert("Department must contain alphabets and spaces only.");
+        return false;
+    }
+
+    if (new Date(joiningDate) > new Date()) {
+        alert("Joining Date cannot be in the future.");
+        return false;
+    }
+
+    alert("Employee Registration Successful!");
+    return true;
+}
+</script>
+
+</body>
+</html>

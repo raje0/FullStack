@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Employee Registration Form</title>
+</head>
+<body>
+
+<h2>Employee Registration Form</h2>
+
+<form onsubmit="return validateForm()">
+    Employee Name: <input type="text" id="employeeName"><br><br>
+    Date of Birth (DOB): <input type="date" id="dob"><br><br>
+    Joining Date: <input type="date" id="joiningDate"><br><br>
+    Salary: <input type="number" id="salary" step="0.01"><br><br>
+    <input type="submit" value="Register">
+</form>
+
+<script>
+function validateForm() {
+    let employeeName = document.getElementById("employeeName").value.trim();
+    let dob = document.getElementById("dob").value;
+    let joiningDate = document.getElementById("joiningDate").value;
+    let salary = parseFloat(document.getElementById("salary").value.trim());
+
+    let namePattern = /^[A-Za-z\s]+$/;
+
+    if (!namePattern.test(employeeName)) {
+        alert("Employee Name must contain alphabets and spaces only.");
+        return false;
+    }
+
+   
+    let dobDate = new Date(dob);
+    let today = new Date();
+    if (dobDate >= today) {
+        alert("Date of Birth must be a past date.");
+        return false;
+    }
+
+    let joiningDateObj = new Date(joiningDate);
+    if (joiningDateObj > today) {
+        alert("Joining Date must not be in the future.");
+        return false;
+    }
+
+
+    if (isNaN(salary) || salary <= 0) {
+        alert("Salary must be a positive number.");
+        return false;
+    }
+
+    alert("Employee Registration Successful!");
+    return true;
+}
+</script>
+
+</body>
+</html>

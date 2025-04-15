@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eLearning System</title>
+</head>
+<body>
+    <h1>Welcome to eLearning System</h1>
+    <h2>Available Courses</h2>
+    <ul id="courses"></ul>
+    <h2>Enroll in a Course</h2>
+    <input type="text" id="courseId" placeholder="Enter Course ID">
+    <button onclick="enroll()">Enroll</button>
+    <script>
+        async function fetchCourses() {
+            const response = await fetch('/courses');
+            const courses = await response.json();
+            const courseList = document.getElementById('courses');
+            courseList.innerHTML = "";
+            courses.forEach(course => {
+                courseList.innerHTML += `<li>${course.name} (ID: ${course.id})</li>`;
+            });
+        }
+        async function enroll() {
+            const courseId = document.getElementById('courseId').value;
+            await fetch('/enroll', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ courseId })
+            });
+            alert("Enrolled successfully!");
+        }
+        fetchCourses();
+    </script>
+</body>
+</html>

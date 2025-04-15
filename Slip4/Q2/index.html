@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="studentApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Registration Form</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body ng-controller="StudentController">
+
+    <h2>Student Registration Form</h2>
+
+    <form name="studentForm" ng-submit="submitForm()" novalidate>
+
+        First Name:
+        <input type="text" name="firstName" ng-model="student.firstName" 
+               ng-pattern="/^[a-zA-Z]*$/" required>
+        <span style="color:red" ng-show="studentForm.firstName.$dirty && studentForm.firstName.$invalid">
+            Only alphabets allowed.
+        </span>
+        <br><br>
+
+        Last Name:
+        <input type="text" name="lastName" ng-model="student.lastName" 
+               ng-pattern="/^[a-zA-Z]*$/" required>
+        <span style="color:red" ng-show="studentForm.lastName.$dirty && studentForm.lastName.$invalid">
+            Only alphabets allowed.
+        </span>
+        <br><br>
+
+        Age:
+        <input type="number" name="age" ng-model="student.age" min="18" max="50" required>
+        <span style="color:red" ng-show="studentForm.age.$dirty && studentForm.age.$invalid">
+            Age must be between 18 and 50.
+        </span>
+        <br><br>
+
+        <button type="submit" ng-disabled="studentForm.$invalid">Register</button>
+
+    </form>
+
+    <h3 ng-show="greeting">{{greeting}}</h3>
+    <h3 ng-show="responseMessage">{{responseMessage}}</h3>
+
+    <script>
+        angular.module('studentApp', [])
+        .controller('StudentController', function($scope, $http, $interval) {
+
+           
+            function updateGreeting() {
+                let hour = new Date().getHours();
+                if (hour < 12) {
+                    $scope.greeting = "Good Morning!";
+                } else if (hour < 17) {
+                    $scope.greeting = "Good Afternoon!";
+                } else {
+                    $scope.greeting = "Good Evening!";
+                }
+            }
+
+            updateGreeting();
+            $interval(updateGreeting, 60000);  
+
+            $scope.submitForm = function() {
+                $http({
+                    method: 'POST',
+                    url: 'https://jsonplaceholder.typicode.com/posts',
+                    data: $scope.student
+                }).then(function success(response) {
+                    $scope.responseMessage = "Registration Successful!";
+                }, function error() {
+                    $scope.responseMessage = "Error! Please try again.";
+                });
+            };
+
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AngularJS Geolocation</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body ng-app="geolocationApp">
+
+    <div ng-controller="GeolocationController">
+        <h2>Current Location</h2>
+        
+        <button ng-click="getLocation()">Get My Location</button>
+        
+        <div ng-if="latitude && longitude">
+            <p><strong>Latitude:</strong> {{latitude}}</p>
+            <p><strong>Longitude:</strong> {{longitude}}</p>
+        </div>
+        
+        <div ng-if="errorMessage">
+            <p style="color: red;"><strong>Error:</strong> {{errorMessage}}</p>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Registration</title>
+    <script>
+        function validateStudent() {
+            let firstName = document.getElementById("fname").value;
+            let lastName = document.getElementById("lname").value;
+            let age = document.getElementById("age").value;
+            let namePattern = /^[A-Za-z]+$/;
+            if (!namePattern.test(firstName)) {
+                alert("Invalid First Name");
+                return false;
+            }
+            if (!namePattern.test(lastName)) {
+                alert("Invalid Last Name");
+                return false;
+            }
+            if (age < 18 || age > 50) {
+                alert("Age must be between 18 and 50");
+                return false;
+            }
+            alert("Registration Successful");
+            return true;
+        }
+    </script>
+</head>
+<body>
+    <form onsubmit="return validateStudent()">
+        <label>First Name:</label>
+        <input type="text" id="fname" name="fname"><br><br>
+        <label>Last Name:</label>
+        <input type="text" id="lname" name="lname"><br><br>
+        <label>Age:</label>
+        <input type="number" id="age" name="age"><br><br>
+        <input type="submit" value="Register">
+    </form>
+</body>
+</html>

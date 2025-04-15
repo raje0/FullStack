@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html ng-app="userApp">
+<head>
+  <meta charset="UTF-8">
+  <title>Username & Password Validation</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  <style>
+    body {
+      font-family: Arial;
+      padding: 20px;
+    }
+    input {
+      display: block;
+      margin: 10px 0;
+      padding: 8px;
+      width: 300px;
+    }
+    .valid-msg {
+      color: green;
+    }
+    .error-msg {
+      color: red;
+    }
+  </style>
+</head>
+<body ng-controller="ValidationController">
+
+  <h2>Username & Password Validation</h2>
+
+  <form ng-submit="validateUser()">
+
+    <label>Username:</label>
+    <input type="text" ng-model="username" placeholder="Enter username">
+
+    <label>Password:</label>
+    <input type="password" ng-model="password" placeholder="Enter password">
+
+    <button type="submit">Validate</button>
+
+  </form>
+
+  <p class="valid-msg" ng-if="message && valid">{{ message }}</p>
+  <p class="error-msg" ng-if="message && !valid">{{ message }}</p>
+
+  <script>
+    var app = angular.module('userApp', []);
+
+    app.controller('ValidationController', function($scope) {
+      $scope.validateUser = function() {
+        if (!$scope.username) {
+          alert("Enter username");
+          $scope.message = "";
+          $scope.valid = false;
+          return;
+        }
+        if ($scope.username.length < 3) {
+          alert("Username is too short");
+          $scope.message = "";
+          $scope.valid = false;
+          return;
+        }
+
+        if (!$scope.password || $scope.password.length < 8) {
+          $scope.message = "Password must be at least 8 characters long.";
+          $scope.valid = false;
+          return;
+        }
+
+        $scope.message = "Valid username";
+        $scope.valid = true;
+      };
+    });
+  </script>
+
+</body>
+</html>

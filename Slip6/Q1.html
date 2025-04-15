@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="ClickApp">
+<head>
+    <meta charset="UTF-8">
+    <title>ng-click Alert Example</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body ng-controller="ClickController">
+
+    <h2>Click the Button</h2>
+    <button ng-click="showAlert()">Click Me!</button>
+
+    <script>
+        angular.module('ClickApp', [])
+            .controller('ClickController', function($scope) {
+                $scope.showAlert = function() {
+                    alert("Hello! You clicked the button.");
+                };
+            });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html ng-app="studentApp">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Details</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  <style>
+    table {
+      width: 80%;
+      margin: 20px auto;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      padding: 10px;
+      border: 1px solid #999;
+      text-align: center;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+  </style>
+</head>
+<body ng-controller="StudentController">
+
+  <h2 style="text-align:center">Student Details</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Roll No</th>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Gender</th>
+        <th>Course</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="student in students">
+        <td>{{student.roll}}</td>
+        <td>{{student.name}}</td>
+        <td>{{student.age}}</td>
+        <td>{{student.gender}}</td>
+        <td>{{student.course}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <script>
+    var app = angular.module("studentApp", []);
+
+    app.controller("StudentController", function($scope) {
+      $scope.students = [
+        { roll: 101, name: "Aarav Mehta", age: 21, gender: "Male", course: "M.Sc CS" },
+        { roll: 102, name: "Sneha Sharma", age: 22, gender: "Female", course: "M.Sc CS" },
+        { roll: 103, name: "Rahul Verma", age: 21, gender: "Male", course: "M.Sc CS" },
+        { roll: 104, name: "Neha Patel", age: 23, gender: "Female", course: "M.Sc CS" },
+        { roll: 105, name: "Karan Singh", age: 22, gender: "Male", course: "M.Sc CS" },
+        { roll: 106, name: "Priya Desai", age: 22, gender: "Female", course: "M.Sc CS" },
+        { roll: 107, name: "Vikram Joshi", age: 21, gender: "Male", course: "M.Sc CS" },
+        { roll: 108, name: "Aisha Khan", age: 23, gender: "Female", course: "M.Sc CS" },
+        { roll: 109, name: "Manav Rathi", age: 22, gender: "Male", course: "M.Sc CS" },
+        { roll: 110, name: "Diya Kapoor", age: 21, gender: "Female", course: "M.Sc CS" }
+      ];
+    });
+  </script>
+
+</body>
+</html>
