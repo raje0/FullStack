@@ -1,12 +1,10 @@
 const mysql = require('mysql');
 
-
 const connection = mysql.createConnection({
     host: 'localhost',
-    user: 'root',      
-    password: '',      
+    user: 'root',
+    password: '',
 });
-
 
 connection.connect((err) => {
     if (err) {
@@ -14,19 +12,19 @@ connection.connect((err) => {
         return;
     }
     console.log('Connected to MySQL as id ' + connection.threadId);
-    
 
     connection.query('CREATE DATABASE IF NOT EXISTS college', (err, result) => {
         if (err) {
             console.error('Error creating database: ' + err.stack);
+            connection.end();
             return;
         }
         console.log('Database "college" created or already exists.');
 
-     
         connection.changeUser({ database: 'college' }, (err) => {
             if (err) {
                 console.error('Error switching to "college" database: ' + err.stack);
+                connection.end();
                 return;
             }
 
@@ -41,16 +39,15 @@ connection.connect((err) => {
             connection.query(createTableQuery, (err, result) => {
                 if (err) {
                     console.error('Error creating table: ' + err.stack);
-                    return;
+                } else {
+                    console.log('Table "students" created or already exists.');
                 }
-                console.log('Table "students" created or already exists.');
+                connection.end();  // <-- Close the connection after the last query
             });
         });
     });
 });
 
-
-connection.end();
 
 
 
