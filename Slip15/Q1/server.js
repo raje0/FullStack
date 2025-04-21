@@ -17,13 +17,12 @@ connection.connect((err) => {
     connection.query('SELECT * FROM students', (err, results) => {
         if (err) {
             console.error('Error fetching data:', err);
-            return;
+        } else {
+            console.log('Student Records:', results);
         }
-        console.log('Student Records:', results);
+        connection.end();  
     });
 });
-
-connection.end();
 
 
 
